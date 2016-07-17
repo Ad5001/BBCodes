@@ -3,7 +3,8 @@ namespace Ad5001\BBCodes;
 
 use pocketmine\Server;
 use pocketmine\Player;
-use pocketmine\utils\TextFormat as C;
+use pocketmine\utils\TextFormat;
+use pocketmine\command\CommandSender;
 
 use Ad5001\BBCodes\Main;
 use Ad5001\BBCodes\BBCode;
@@ -27,20 +28,26 @@ class Fade extends BBCode {
         $arr = str_split($msg);
         $i = 0;
         foreach($arr as $el) {
-            $rand = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, "a", "b", "c", "d", "e", "f"];
-            $arr[$i] = "§" . array_rand($rand) . $el;
+            $rand = [TextFormat::BLACK, TextFormat::DARK_BLUE, TextFormat::DARK_GREEN, TextFormat::DARK_AQUA, TextFormat::DARK_RED, TextFormat::DARK_PURPLE, TextFormat::GOLD, TextFormat::GRAY, TextFormat::DARK_GRAY, TextFormat::BLUE, TextFormat::GREEN, TextFormat::AQUA, TextFormat::RED, TextFormat::LIGHT_PURPLE, TextFormat::YELLOW, TextFormat::WHITE];
+            $arr[$i] = array_rand($rand) . $el;
             $i++;
         }
-        return implode("", $el);
+        return implode("", $arr);
     }
     
     
     
-    public function takeParam() : bool { return []; }
+    public function takeParam() : array { return []; }
     
     
     
-    public function canUse(Player $sender) : bool {
+    public function canUse(CommandSender $sender) : bool {
         return $sender->hasPermission("bbcodes.use." . $this->main->getConfig()->get("FadePerm"));
+    }
+    
+    
+    
+    public function getDescription() : string {
+        return "Make a message ".$this->parse("bounty");
     }
 }

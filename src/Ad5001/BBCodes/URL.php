@@ -4,6 +4,7 @@ namespace Ad5001\BBCodes;
 use pocketmine\Server;
 use pocketmine\Player;
 use pocketmine\utils\TextFormat as C;
+use pocketmine\command\CommandSender;
 
 use Ad5001\BBCodes\Main;
 use Ad5001\BBCodes\BBCode;
@@ -24,18 +25,25 @@ class URL extends BBCode {
     
     
     public function parse(string $msg) : string {
-        if (!filter_var($msg, FILTER_VALIDATE_URL) === false) {
-            return C::DARK_BLUE . C::UNDERLINED . $msg . C::WHITE . C::RESET;
+        if (filter_var($msg, FILTER_VALIDATE_URL)) {
+            return C::DARK_BLUE . C::UNDERLINE . $msg . C::WHITE . C::RESET;
+        } else {
+            return $msg;
         }
     }
     
     
     
-    public function takeParam() : bool { return []; }
+    public function takeParam() : array { return []; }
     
     
-    public function canUse(Player $sender) : bool {
+    public function canUse(CommandSender $sender) : bool {
         return $sender->hasPermission("bbcodes.use." . $this->main->getConfig()->get("URLPerm"));
+    }
+    
+    
+    public function getDescription() : string {
+        return "Make an URL underlined and blue : " . C::DARK_BLUE . C::UNDERLINE . "http://ad5001.ga" . C::WHITE . C::RESET . ".";
     }
 
 }

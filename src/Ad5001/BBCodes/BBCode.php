@@ -21,7 +21,7 @@ abstract class BBCode {
    abstract function parse(string $msg) : string;
    
    
-   abstract function takeParam() : bool;
+   abstract function takeParam() : array;
    
    
    abstract function canUse(CommandSender $sender) : bool;

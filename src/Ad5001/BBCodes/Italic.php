@@ -4,6 +4,7 @@ namespace Ad5001\BBCodes;
 use pocketmine\Server;
 use pocketmine\Player;
 use pocketmine\utils\TextFormat as C;
+use pocketmine\command\CommandSender;
 
 use Ad5001\BBCodes\Main;
 use Ad5001\BBCodes\BBCode;
@@ -24,16 +25,21 @@ class Italic extends BBCode {
     
     
     public function parse(string $msg) : string {
-        return C::BOLD . $msg . C::RESET;
+        return C::ITALIC . $msg . C::RESET;
     }
     
     
     
-    public function takeParam() : bool { return []; }
+    public function takeParam() : array { return []; }
     
     
-    public function canUse(Player $sender) : bool {
+    public function canUse(CommandSender $sender) : bool {
         return $sender->hasPermission("bbcodes.use." . $this->main->getConfig()->get("ItalicPerm"));
+    }
+    
+    
+    public function getDescription() : string {
+        return "Make a message §oItalic§r.";
     }
 
 }

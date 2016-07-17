@@ -4,6 +4,7 @@ namespace Ad5001\BBCodes;
 use pocketmine\Server;
 use pocketmine\Player;
 use pocketmine\utils\TextFormat as C;
+use pocketmine\command\CommandSender;
 
 use Ad5001\BBCodes\Main;
 use Ad5001\BBCodes\BBCode;
@@ -79,12 +80,16 @@ class Color extends BBCode {
     
     
     
-    public function takeParam() : bool { return ["red", "blue", "dark_blue", "lime", "green", "orange", "yellow", "dark_red", "dark_purple", "dark_aqua", "aqua", "gray", "dark_gray", "black"]; }
+    public function takeParam() : array { return ["red", "blue", "dark_blue", "lime", "green", "orange", "yellow", "dark_red", "dark_purple", "dark_aqua", "aqua", "gray", "dark_gray", "black"]; }
     
     
     
-    public function canUse(Player $sender) : bool {
+    public function canUse(CommandSender $sender) : bool {
         return $sender->hasPermission("bbcodes.use." . $this->main->getConfig()->get("ColorPerm"));
+    }
+    
+    public function getDescription() : string {
+        return "Change the §acolor§f of the message.";
     }
 
 }

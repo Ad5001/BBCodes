@@ -47,7 +47,9 @@ class Main extends PluginBase implements Listener{
     
     
     public function onPlayerChat(PlayerChatEvent $event) {
+        // $this->getServer()->broadcastMessage($event->getMessage());
         $event->setMessage($this->bbcodesManager->parse($event->getPlayer(), $event->getMessage()));
+        // $this->getServer()->broadcastMessage($event->getMessage());
     }
     
     
@@ -66,26 +68,35 @@ class Main extends PluginBase implements Listener{
                     
                     case strtolower($args[0]) == "help":
                     $sender->sendMessage("§a§o§l[§r§6BBCodes§a§o§l] §r§f Here are all the BBcodes that you have the access to :");
-                    $access = ["[list=1]"];
+                    $access = [];
                     foreach($this->bbcodesManager->getTags() as $key => $tag) {
                         if($tag->canUse($sender)) {
-                            array_push($access, "[*] " . get_class($tag) . " : [$key]Message[$key] . " . $tag->getDescription());
+                            $class = new \ReflectionClass(get_class($tag));
+                            array_push($access, "[*] " . $class->getShortName() . " : [$key]Message[$key] . " . $tag->getDescription());
                         }
                     }
-                    array_push($access, "[/list]");
-                    $sender->sendMessage($this->bbcodesManager->getTagByTag("list")->parse(implode("", $msg)));
+                    $sender->sendMessage($this->bbcodesManager->getTagByTag("list")->parse(implode("", $access), 1));
+                    return true;
                     break;
                     
                     
                     case $this->bbcodesManager->getTagByName($args[0]) !== false:
-                    $sender->sendMessage("§a§o§l[§r§6BBCodes§a§o§l] §r§f Help for " . get_class($this->bbcodesManager->getTagByName($args[0])) . " :");
-                    $sender->sendMessage("Usage : [{$this->bbcodesManager->getTagByName($args[0])->getTagName()}]Message[{$this->bbcodesManager->getTagByName($args[0])->getTagName()}] | Description : " . $this->bbcodesManager->getTagByName($args[0])->getDescription());
+                    $class = new \ReflectionClass(get_class($this->bbcodesManager->getTagByName($args[0])));
+                    $sender->sendMessage("§a§o§l[§r§6BBCodes§a§o§l] §r§f Help for " .  $class->getShortName() . " :");
+                    $sender->sendMessage("Usage : [{$this->bbcodesManager->getTagByName($args[0])->getTagName()}]Message[{$this->bbcodesManager->getTagByName($args[0])->getTagName()}] | Description : " . $this->bbcodesManager->getTagByName($args[0])->getDescription() . " | Can you use it ? " . $this->bbcodesManager->getTagByTag($args[0])->canUse($sender));
+                    return true;
                     break;
                     
                     
                     case $this->bbcodesManager->getTagByTag($args[0]) !== false:
-                    $sender->sendMessage("§a§o§l[§r§6BBCodes§a§o§l] §r§f Help for " . get_class($this->bbcodesManager->getTagByTag($args[0])) . " :");
-                    $sender->sendMessage("Usage : [$args[0]]Message[$args[0]] | Description : " . $this->bbcodesManager->getTagByTag($args[0])->getDescription() . " | Can you use it ? ");
+                    $class = new \ReflectionClass(get_class($this->bbcodesManager->getTagByTag($args[0])));
+                    $sender->sendMessage("§a§o§l[§r§6BBCodes§a§o§l] §r§f Help for " . $class->getShortName() . " :");
+                    $sender->sendMessage("Usage : [$args[0]]Message[$args[0]] | Description : " . $this->bbcodesManager->getTagByTag($args[0])->getDescription() . " | Can you use it ? " . $this->bbcodesManager->getTagByTag($args[0])->canUse($sender));
+                    return true;
+                    break;
+                    
+                    default:
+                    return false;
                     break;
                 }
             }

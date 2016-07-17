@@ -3,7 +3,8 @@ namespace Ad5001\BBCodes;
 
 use pocketmine\Server;
 use pocketmine\Player;
-use pocketmine\utils\TextFormat as C;
+use pocketmine\utils\TextFormat;
+use pocketmine\command\CommandSender;
 
 use Ad5001\BBCodes\Main;
 use Ad5001\BBCodes\BBCode;
@@ -37,9 +38,10 @@ class ListCode extends BBCode {
             break;
             
             case "1":
-            $i = 0;
+            $i = 1;
             foreach($sentences as $sentence) {
                 array_push($chars, $i . ".");
+                $i++;
             }
             break;
             
@@ -50,7 +52,7 @@ class ListCode extends BBCode {
             break;
         }
         $i = 0;
-        foreach($setences as $sentence) {
+        foreach($sentences as $sentence) {
             $sentences[$i] = $chars[$i] . " " . $sentence;
             $i++;
         }
@@ -59,7 +61,7 @@ class ListCode extends BBCode {
     
     
     
-    public function takeParam() : bool { return ["", "1", "a"]; }
+    public function takeParam() : array { return ["", "1", "a"]; }
     
     
     
@@ -69,7 +71,7 @@ class ListCode extends BBCode {
     
     
     
-    public function getDescription() {
-        return "Make easily lists by using this tag. To make a list, just do [list=<a (will be listed by a., b., c., ect...) | 1 (will be listed by 1., 2., 3., ect.) | (will be listed with -)]First element[*]Second Element[*]Third element[*]...[/list]";
+    public function getDescription() : string {
+        return "Make easily lists by using this tag. To make a list, just do [list=<a (will be listed by a., b., c., ect...) | 1 (will be listed by 1., 2., 3., ect.) | (will be listed with -)]First element[§f*]Second Element[§f*]Third element[§f*]...[/list]";
     }
 }

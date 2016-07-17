@@ -61,17 +61,19 @@ class BBCodesManager {
                 $parts = explode("[" . $name . "]", $msg);
                 $num = 1;
                 while(isset($parts[$num])) {
-                    $parts[$num] = str_replace(explode("[/" . $name . "]", $parts[$num])[0], $tagClass->parse(explode("[/" . $name . "]", $parts[$num])[0]));
+                    $parts[$num] = str_replace(explode("[/" . $name . "]", $parts[$num])[0] . "[/" . $name . "]", $tagClass->parse(explode("[/" . $name . "]", $parts[$num])[0]), $parts[$num]);
                     $num += 2;
                 }
                 $msg = implode("", $parts);
             } else {
                 foreach($tagClass->takeParam() as $param) {
-                    if(strpos($msg, "[" . $name . "=" . $param . "]") == strpos($msg, "[/" . $name . "]") and strpos($msg, "[" . $name . "=" . $param . "]") !== false and $tagClass->canUse($sender)) {
+                    if(strpos($msg, "[" . $name . "=" . $param . "]") < strpos($msg, "[/" . $name . "]") and strpos($msg, "[" . $name . "=" . $param . "]") !== false and $tagClass->canUse($sender)) {
+                        // $this->server->broadcastMessage("Found $name with $param");
                         $parts = explode("[" . $name . "=" . $param . "]", $msg);
                         $num = 1;
                         while(isset($parts[$num])) {
-                            $parts[$num] = str_replace(explode("[/" . $name . "]", $parts[$num])[0], $tagClass->parse(explode("[/" . $name . "]", $parts[$num])[0], $param));
+                            $parts[$num] = str_replace(explode("[/" . $name . "]", $parts[$num])[0] . "[/" . $name . "]", $tagClass->parse(explode("[/" . $name . "]", $parts[$num])[0], $param), $parts[$num]);
+                            // $this->server->broadcastMessage("Processing $name with $param at $part[$num]");
                             $num += 2;
                         }
                         $msg = implode("", $parts);
