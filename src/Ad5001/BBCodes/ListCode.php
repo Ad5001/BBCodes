@@ -31,7 +31,7 @@ class ListCode extends BBCode {
         switch($param) {
             
             case "a":
-            $num = round($sentences / 26) + 1;
+            $num = round($charnum / 26) + 1;
             for($i = 0; $i < $num; $i++) {
                 array_merge($chars, ["a.", "b.", "c.", "d.", "e.", "f.", "g.", "i.", "j.", "k.", "l.", "m.", "n.", "o.", "p.", "q.", "r.", "s.", "t.", "u.", "v.", "w.", "x.", "z."]);
             }

@@ -51,10 +51,10 @@ class Color extends BBCode {
             return C::YELLOW . $msg . C::WHITE;
             break;
             case "dark_red":
-            return C::YELLOW . $msg . C::WHITE;
+            return C::DARK_RED . $msg . C::WHITE;
             break;
             case "dark_purple":
-            return C::YELLOW . $msg . C::WHITE;
+            return C::DARK_PURPLE . $msg . C::WHITE;
             break;
             case "gray":
             return C::GRAY . $msg . C::WHITE;

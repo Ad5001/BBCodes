@@ -61,8 +61,10 @@ class BBCodesManager {
                 $parts = explode("[" . $name . "]", $msg);
                 $num = 1;
                 while(isset($parts[$num])) {
+                    // print_r($parts);
+                    // print_r(explode("[/" . $name . "]", $parts[$num])[0] . "[/" . $name . "]");
                     $parts[$num] = str_replace(explode("[/" . $name . "]", $parts[$num])[0] . "[/" . $name . "]", $tagClass->parse(explode("[/" . $name . "]", $parts[$num])[0]), $parts[$num]);
-                    $num += 2;
+                    $num++;
                 }
                 $msg = implode("", $parts);
             } else {
@@ -74,7 +76,7 @@ class BBCodesManager {
                         while(isset($parts[$num])) {
                             $parts[$num] = str_replace(explode("[/" . $name . "]", $parts[$num])[0] . "[/" . $name . "]", $tagClass->parse(explode("[/" . $name . "]", $parts[$num])[0], $param), $parts[$num]);
                             // $this->server->broadcastMessage("Processing $name with $param at $part[$num]");
-                            $num += 2;
+                            $num++;
                         }
                         $msg = implode("", $parts);
                     }

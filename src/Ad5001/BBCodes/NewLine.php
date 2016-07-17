@@ -25,7 +25,7 @@ class NewLine extends BBCode {
     
     
     public function parse(string $msg) : string {
-        return PHP_EOL . $msg;
+        return "\n" . $msg;
     }
     
     
@@ -40,6 +40,6 @@ class NewLine extends BBCode {
     
     
     public function getDescription() : string {
-        return "Add a new line ". PHP_EOL . " to a message";
+        return "Add a new line \n to a message";
     }
 }

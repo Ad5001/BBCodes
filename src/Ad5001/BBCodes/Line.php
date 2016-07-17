@@ -25,7 +25,7 @@ class Line extends BBCode {
     
     
     public function parse(string $msg) : string {
-        return PHP_EOL . "----------------------------" . PHP_EOL . $msg;
+        return "\n" . "----------------------------" . "\n" . $msg;
     }
     
     
@@ -41,6 +41,6 @@ class Line extends BBCode {
     
     
     public function getDescription() : string {
-        return "Add a line.". PHP_EOL . "----------------------------" . PHP_EOL . "between two messages !";
+        return "Add a line.". "\n" . "----------------------------" . "\n" . "between two messages !";
     }
 }
