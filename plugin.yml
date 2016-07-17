@@ -1,0 +1,37 @@
+---
+name: BBCodes
+author:  Ad5001
+version: 1.0
+api: [2.0.0]
+main: Ad5001\BBCodes\Main
+commands: 
+    bbcodes:
+      description: "Get help about BBCodes"
+      usage: "/bbcodes <<tag> | <tag name> | help>"
+      permission: bbcodes.help
+permissions:
+    bbcodes.help:
+      default: true
+    bbcodes.use.op:
+      default: op
+    bbcodes.use.public:
+      default: true
+    bbcodes.use.none:
+      default: false
+    bbcodes.use.bold:
+      default: op
+    bbcodes.use.italic:
+      default: op
+    bbcodes.use.colors:
+      default: op
+    bbcodes.use.urls:
+      default: true
+    bbcodes.use.newline:
+      default: op
+    bbcodes.use.line:
+      default: op
+    bbcodes.use.fade:
+      default: op
+    bbcodes.use.list:
+      default: op
+...

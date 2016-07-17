@@ -1,0 +1,26 @@
+---
+# Welcome to BBCodes config. Here you can choose permisions for all of the BBCodes.
+
+# Possibilities: op, public, none,<name of the tag>
+# Permission: bbcodes.use.<what you have choosen>
+
+# Bold ([b]Message to bold[/b])
+BoldPerm: bold
+# Italic ([i]Message to italic[/i])
+ItalicPerm: italic
+# Color ([color=<color name>]Message to color[/color])
+ColorPerm: colors
+# URL ([url]http://enter-url-here.com[/url])
+URLPerm: urls
+# NewLine ([br][/br]) Make a new line
+NewLinePerm: newline
+# Line ([hr][/hr]) // Separe curent message to an another by a line
+LinePerm: line
+# Fade ([fade]Message to fade[/fade])
+FadePerm: fade
+# List ([list=<a | 1 | >]First sentence of the list[*]Second sentence of the list[*]Third sentence of the list[*]...[/list])
+ListPerm: list
+
+# Wanna know which one you have the access to ? Use /bbcodes help
+# Need more help about a tag ? Use /bbcodes <tag name | tag>
+...
