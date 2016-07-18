@@ -17,6 +17,8 @@ use Ad5001\BBCodes\URL as CodeURL;
 use Ad5001\BBCodes\NewLine as NewLineCode;
 use Ad5001\BBCodes\Line as LineCode;
 use Ad5001\BBCodes\Fade as FadeCode;
+use Ad5001\BBCodes\Sup as SupCode;
+use Ad5001\BBCodes\Sub as SubCode;
 use Ad5001\BBCodes\ListCode;
 use Ad5001\BBCodes\BBCodesManager;
 
@@ -37,6 +39,8 @@ class Main extends PluginBase implements Listener{
         $bbcm->registerTag($this, new NewLineCode($this));
         $bbcm->registerTag($this, new LineCode($this));
         $bbcm->registerTag($this, new FadeCode($this));
+        $bbcm->registerTag($this, new SupCode($this));
+        $bbcm->registerTag($this, new SubCode($this));
         $bbcm->registerTag($this, new ListCode($this));
     }
 

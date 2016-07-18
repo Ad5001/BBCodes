@@ -46,7 +46,7 @@ class BBCodesManager {
     public function registerTag(Plugin $owner, BBCode $class) {
         if($this->isTagTaken($class->getTagName())) {
             $this->main->getLogger()->warning($owner->getName() . " tried to register an already taken tag. You can check if a tag is already registered by doing " . '$bbcodeManager->isTagTaken("tagname")');
-            $owner->setDisable();
+            $owner->setEnabled(false);
             return false;
         } else {
             $this->tags[$class->getTagName()] = $class;
